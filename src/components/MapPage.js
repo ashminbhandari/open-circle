@@ -1,5 +1,7 @@
 import React from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { Circle, GoogleApiWrapper, Map, MapProps, Marker, InfoWindow } from "google-maps-react";
+
+
 
 const firebase = require('firebase');
 const mapStyles = {
@@ -92,11 +94,13 @@ class MapPage extends React.Component {
                 longitude: this.state.longitude,
                 info: response
             };
-            firebase
-                .firestore()
-                .collection('users')
-                .doc()
-                .set(userInfo);
+            if(userInfo.latitude!=null && userInfo.longitude!=null && userInfo.info!=null) {
+                firebase
+                    .firestore()
+                    .collection('users')
+                    .doc()
+                    .set(userInfo);
+            }
 
 
 
@@ -118,13 +122,17 @@ class MapPage extends React.Component {
     }
 
     addMarkers = () => {
+
         if(this.state.allUsers!=null) {
             return this.state.allUsers.map((store, index) => {
-                return <Marker key={index} id={index} position={{
-                    lat: store.latitude,
-                    lng: store.longitude
-                }}
-                               onClick={() => console.log("You clicked me!")}/>
+                return (<Marker key={index} id={index} position={{
+                        lat: store.latitude,
+                        lng: store.longitude
+                    }}
+                                onClick={() => console.log(store.info["display_name"])}/>
+
+
+                );
             })
         }
     }
@@ -140,8 +148,12 @@ class MapPage extends React.Component {
                     style={mapStyles}
                     zoom={16}
                     center={{ lat: this.state.latitude, lng: this.state.longitude}}>
+
                     {this.addMarkers()}
+
+
                 </Map>
+
 
             </div>
         );

@@ -21,7 +21,7 @@ class Landing extends React.Component {
 
 
     handleChange(){
-       window.open('https://accounts.spotify.com/authorize?client_id=45498e9678054ff8a74e0460f5782cd7&redirect_uri=https:%2F%2F192.168.22.233:3000%2Fmap&scope=user-read-recently-played%20user-read-currently-playing%20user-read-private%20user-read-email&response_type=token&state=123', "_self");
+       window.open('https://accounts.spotify.com/authorize?client_id=45498e9678054ff8a74e0460f5782cd7&redirect_uri=https:%2F%2Fd69593ea.ngrok.io%2Fmap&scope=user-read-recently-played%20user-read-currently-playing%20user-read-private%20user-read-email&response_type=token&state=123', "_self");
     }
 
 
