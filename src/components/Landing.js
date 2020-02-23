@@ -1,7 +1,7 @@
 import React from 'react';
 import openCircle from './opencircle.png';
 import Switch from "react-switch";
-import axios from 'axios';
+
 
 
 import './Landing.css';

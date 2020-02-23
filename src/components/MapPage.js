@@ -1,8 +1,12 @@
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import {geolocated} from 'react-geolocated';
-import axios from "axios";
+import SpotifyLogin from 'react-spotify-login';
 
+
+const onSuccess = response => console.log(response);
+const onFailure = response => console.error(response);
+
+const firebase = require('firebase');
 const mapStyles = {
     width: '100%',
     height: '100%',
@@ -45,22 +49,22 @@ class MapPage extends React.Component {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
         };
+        firebase
+            .firestore()
+            .collection('users')
+            .doc()
+            .set(userInfo);
 
-        
 
-        try
-        {
-            await axios.post('http://192.168.4.179:5000/database/toggle', userInfo);
-        }
-        catch(error)
-        {
-            console.log(error);
-        }
 
     }
 
     componentDidMount() {
         this.getLocation();
+
+
+
+
     }
 
 
@@ -70,6 +74,10 @@ class MapPage extends React.Component {
         return (
 
             <div>
+                <SpotifyLogin clientId={'45498e9678054ff8a74e0460f5782cd7'}
+                              redirectUri={'https://192.168.22.233:3000/map'}
+                              onSuccess={onSuccess}
+                              onFailure={onFailure}/>
                 <Map
                     google={this.props.google}
                     zoom={16}
@@ -79,6 +87,7 @@ class MapPage extends React.Component {
                     <Marker position={{ lat: this.state.latitude, lng: this.state.longitude}} />
 
                 </Map>
+
             </div>
         );
     }
