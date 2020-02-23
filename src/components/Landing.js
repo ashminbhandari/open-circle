@@ -8,41 +8,20 @@ import './Landing.css';
 import MapPage from "./MapPage";
 
 
-function getPosition() {
-    // Simple wrapper
-    return new Promise((res, rej) => {
-        navigator.geolocation.getCurrentPosition(res, rej);
-    });
-}
+
 
 class Landing extends React.Component {
     constructor() {
         super();
-        this.state = { checked: false };
+        this.state = { checked: false, userData: ""};
         this.handleChange = this.handleChange.bind(this);
     }
 
 
-    async handleChange(checked){
+    handleChange(checked){
         //validate post request data *
         //if no error proceed to set state else: display error *
         this.setState({ checked: true });
-        var position = await getPosition();  // wait for getPosition to complete
-
-        var userInfo = {'toggleOn': checked, 'latitude':position.coords.latitude,'longitude':position.coords.longitude};
-        try
-        {
-            await axios.post('http://192.168.4.179:5000/database/toggle', userInfo);
-
-        }
-        catch(error)
-        {
-            console.log(error);
-        }
-
-
-
-
     }
     render() {
         if(!this.state.checked) {
@@ -71,8 +50,7 @@ class Landing extends React.Component {
             )
         }
         else {
-            console.log(this.state.checked);
-            return(<MapPage/>);
+            return(<MapPage />);
         }
     }
 
