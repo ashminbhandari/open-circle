@@ -7,7 +7,6 @@ import { BrowserRouter as Router,  Switch} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import MapPage from './components/MapPage';
 
-
 function App() {
   return (
         <Router>
@@ -16,7 +15,6 @@ function App() {
             <Switch>
             <Route path="/" exact component={Landing}/>
             <Route path="/map" exact component={MapPage}/>
-            <Route path="/" component={Landing}/>
             </Switch>
         </Router>
 

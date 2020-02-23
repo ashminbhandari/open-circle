@@ -1,11 +1,13 @@
 import React from 'react';
 import openCircle from './opencircle.png';
 import Switch from "react-switch";
-
-
-
 import './Landing.css';
 import MapPage from "./MapPage";
+import SpotifyLogin from 'react-spotify-login';
+
+
+const onSuccess = response => console.log(response);
+const onFailure = response => console.error(response);
 
 
 
@@ -13,19 +15,19 @@ import MapPage from "./MapPage";
 class Landing extends React.Component {
     constructor() {
         super();
-        this.state = { checked: false, userData: ""};
         this.handleChange = this.handleChange.bind(this);
+
     }
 
 
-    handleChange(checked){
-        //validate post request data *
-        //if no error proceed to set state else: display error *
-        this.setState({ checked: true });
+    handleChange(){
+       window.open('https://accounts.spotify.com/authorize?client_id=45498e9678054ff8a74e0460f5782cd7&redirect_uri=https:%2F%2F192.168.22.233:3000%2Fmap&scope=user-read-recently-played%20user-read-currently-playing%20user-read-private%20user-read-email&response_type=token&state=123', "_self");
     }
+
+
     render() {
-        if(!this.state.checked) {
-            console.log(this.state.checked);
+
+
             return (
 
                 <div
@@ -42,18 +44,13 @@ class Landing extends React.Component {
                         <Switch
                             uncheckedIcon={false}
                             checkedIcon={false}
-                            height={50} width={90} onChange={this.handleChange} checked={this.state.checked}/>
+                            height={50} width={90} onChange={this.handleChange}/>
                     </label>
                 </div>
 
 
             )
         }
-        else {
-            return(<MapPage />);
-        }
-    }
-
 }
 
 export default Landing;
