@@ -24,7 +24,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-geolocated": "^3.0.1",
-    "react-router": "^3.2.5",
+    "react-router": "^5.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "react-spotify-login": "^0.9.1",
